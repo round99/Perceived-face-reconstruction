@@ -76,29 +76,20 @@ x2 = Conv2D(512, (3, 3), activation='relu', padding='same', name='id_conv5_2')(x
 x2 = Conv2D(512, (3, 3), activation='relu', padding='same', name='id_conv5_3')(x2)
 x2 = MaxPooling2D((2, 2), strides=(2, 2), name='id_pool5')(x2)
 x2 = Flatten(name='flatten2')(x2)
-x2 = Dense(hidden_dim, activation='relu', name='id_fc6',
-           kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal', seed=None))(
-    x2)
-x2 = Dense(hidden_dim, activation='relu', name='id_fc7',
-           kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal', seed=None))(
-    x2)
+x2 = Dense(hidden_dim, activation='relu', name='id_fc6',kernel_regularizer=regularizers.l2(0.001))(x2)
+x2 = Dense(hidden_dim, activation='relu', name='id_fc7',kernel_regularizer=regularizers.l2(0.001))(x2)
 x2 = Dropout(dropout_rate)(x2)
-out2 = Dense(nb_class2, activation='softmax', name='id_fc8',
-             kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal',
-                                                             seed=None))(x2)
+out2 = Dense(nb_class2, activation='softmax', name='id_fc8',kernel_regularizer=regularizers.l2(0.001))(x2)
 #out2 Identity
 x3 = Conv2D(512, (3, 3), activation='relu', padding='same', name='gen_conv5_1')(last_layer)
 x3 = Conv2D(512, (3, 3), activation='relu', padding='same', name='gen_conv5_2')(x3)
 x3 = Conv2D(512, (3, 3), activation='relu', padding='same', name='gen_conv5_3')(x3)
 x3 = MaxPooling2D((2, 2), strides=(2, 2), name='gen_pool5')(x3)
 x3 = Flatten(name='flatten3')(x3)
-x3 = Dense(hidden_dim, activation='relu', name='gen_fc6',
-           kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal', seed=None))(x3)
-x3 = Dense(hidden_dim, activation='relu', name='gen_fc7',
-           kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal', seed=None))(x3)
+x3 = Dense(hidden_dim, activation='relu', name='gen_fc6',kernel_regularizer=regularizers.l2(0.001))(x3)
+x3 = Dense(hidden_dim, activation='relu', name='gen_fc7',kernel_regularizer=regularizers.l2(0.001))(x3)
 x3 = Dropout(dropout_rate)(x3)
-out3 = Dense(nb_class3, activation='softmax', name='gen_fc8',
-             kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal',seed=None))(x3)
+out3 = Dense(nb_class3, activation='softmax', name='gen_fc8',kernel_regularizer=regularizers.l2(0.001))(x3)
 # out3 Gender
 
 custom_vgg_model = Model(vgg_model.input, [out1, out2,out3])
