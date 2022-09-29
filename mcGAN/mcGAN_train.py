@@ -70,7 +70,7 @@ def train(args):
     criterion = nn.BCELoss()
 
     # set real label and fake label
-    real_label = 1
+    real_label = 0.9
     fake_label = 0
 
     # set optimizer
