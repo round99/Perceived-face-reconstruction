@@ -51,8 +51,7 @@ x = Flatten(name='flatten1')(last_layer)
 x = Dense(hidden_dim, activation='relu', name='fc6', kernel_regularizer=regularizers.l2(0.001))(x)
 x = Dense(hidden_dim, activation='relu', name='fc7', kernel_regularizer=regularizers.l2(0.001))(x)
 x = Dropout(dropout_rate)(x)
-out = Dense(all_class, activation='softmax', name='fc8',
-             kernel_initializer=initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal', seed=None))(x)
+out = Dense(all_class, activation='softmax', name='fc8',kernel_regularizer=regularizers.l2(0.001))(x)
 
 custom_vgg_model = Model(vgg_model.input, out)
 
