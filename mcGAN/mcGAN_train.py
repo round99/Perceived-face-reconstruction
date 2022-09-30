@@ -168,7 +168,7 @@ def train(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='GAN train')
     parser.add_argument('--num_epochs', default=2000, type=int, help='number of epochs')
-    parser.add_argument('--batch_size', default=128, type=int, help='batch size of train')
+    parser.add_argument('--batch_size', default=16, type=int, help='batch size of train')
     parser.add_argument('--lr1', default=2e-4, type=float, help='Learning rate')
     parser.add_argument('--nc', default=1, type=int, help='channel of input')
     parser.add_argument('--nz', default=116, type=int, help='len of noise')
